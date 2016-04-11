@@ -19,13 +19,13 @@
                         <a href="room.jsp">Room</a>
                     </li>
                     <li>
-                        <a href="#">Booking a room</a>
+                        <a href="booking.jsp">Booking a room</a>
                     </li>
                     <li>
-                        <a href="#">Photo Gallery</a>
+                        <a href="photo.jsp">Photo Gallery</a>
                     </li>
                     <li>
-                        <a href="#">Services</a>
+                        <a href="service.jsp">Services</a>
                     </li>
                     <li>
                         <a href="contact.jsp">Contact</a>

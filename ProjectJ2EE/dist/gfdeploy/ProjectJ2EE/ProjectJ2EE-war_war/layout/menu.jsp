@@ -6,8 +6,8 @@
 <div class="col-md-3">
                 <p class="lead">Categories</p>
                 <div class="list-group">
-                    <a href="#" class="list-group-item">Booking a room</a>
-                    <a href="#" class="list-group-item">Take a visit</a>
+                    <a href="booking.jsp" class="list-group-item">Booking a room</a>
+                    <a href="photo.jsp" class="list-group-item">Take a visit</a>
                  
                 </div>
             </div>
