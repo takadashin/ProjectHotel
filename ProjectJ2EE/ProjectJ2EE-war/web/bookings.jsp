@@ -38,7 +38,8 @@
 
     <!-- Custom CSS -->
     <link href="resource/css/shop-homepage.css" rel="stylesheet">
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
+    
 </head>
 
 <body>
@@ -189,8 +190,26 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="resource/js/bootstrap.min.js"></script>
+     <script src="resource/js/moment.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
 
 </body>
-
+ <script>
+    $(document).ready(function () {
+  //called when key is pressed in textbox
+        $('#datetimepickercheckin').datetimepicker({
+            
+        
+            ignoreReadonly: true           
+        });
+        $('#datetimepickercheckout').datetimepicker({
+            
+        
+            ignoreReadonly: true           
+        });
+        
+      
+       }); 
+          </script>
 </html>
 
