@@ -6,6 +6,7 @@
 package com.humber.ca;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -15,13 +16,14 @@ import javax.ejb.Local;
  */
 @Local
 public interface RoomSLBeanLocal {
-      Boolean Insert(String Name, String Email, String Phone, String Address, String Type);
+    Boolean Insert(BigInteger price,BigInteger capacity,String img,BigInteger floor,String description);
 
-    Boolean Update(BigDecimal id,String Name, String Email, String Phone, String Address, String Type);
+    Boolean Update(BigDecimal id,BigInteger price,BigInteger capacity,String img,BigInteger floor,String description);
 
     Boolean delete(BigDecimal Id);
 
     Object SearchByID(BigDecimal Id);
 
     List findAll();
+    List findEmptyRoom();
 }

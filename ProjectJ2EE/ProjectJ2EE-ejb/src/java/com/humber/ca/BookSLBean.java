@@ -6,6 +6,9 @@
 package com.humber.ca;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import javax.ejb.Stateless;
@@ -29,15 +32,27 @@ public class BookSLBean implements BookSLBeanRemote, BookSLBeanLocal {
     private EntityManager em ;
     
     @Override
-    public Boolean Insert(String Name, String Email, String Phone, String Address, String Type) {
+    public Boolean Insert(BigDecimal RoomID, BigDecimal UserID,Date CheckIn,Date CheckOut,BigInteger numadult,BigInteger numkid ) {
         try
         {
         
             
-            int id = em.createQuery("select max(u.id) from Bookings u", Integer.class).getSingleResult();
+            BigDecimal id = em.createQuery("select max(u.id) from Bookings u", BigDecimal.class).getSingleResult();
+            id = id.add(new BigDecimal(1));
             Bookings newo = new Bookings();
-            newo.setId(new BigDecimal(id));
+            newo.setId(id);
+            Rooms roomob = (Rooms)em.find(Rooms.class,RoomID);
+            Users userob = (Users)em.find(Users.class,UserID);
+            
+            newo.setRoomid(roomob);
+            newo.setUserid(userob);
+            newo.setCheckin(CheckIn);
+            newo.setCheckout(CheckOut);
+            newo.setNumadult(numadult);
+            newo.setNumchild(numkid);
+            newo.setCreateAt(Calendar.getInstance().getTime());
             em.persist(newo);
+           
          
             return true;
         }
@@ -48,12 +63,21 @@ public class BookSLBean implements BookSLBeanRemote, BookSLBeanLocal {
     }
 
     @Override
-    public Boolean Update(BigDecimal id,String Name, String Email, String Phone, String Address, String Type) {
+    public Boolean Update(BigDecimal id,BigDecimal RoomID, BigDecimal UserID,Date CheckIn,Date CheckOut,BigInteger numadult,BigInteger numkid) {
         try
         {
         
             Bookings newo = (Bookings)em.find(Bookings.class, id);
+            Rooms roomob = (Rooms)em.find(Rooms.class,RoomID);
+            Users userob = (Users)em.find(Users.class,UserID);
             
+            newo.setRoomid(roomob);
+            newo.setUserid(userob);
+            newo.setCheckin(CheckIn);
+            newo.setCheckout(CheckOut);
+            newo.setNumadult(numadult);
+            newo.setNumchild(numkid);
+            newo.setCreateAt(Calendar.getInstance().getTime());
         
         return true;
         }
@@ -85,7 +109,7 @@ public class BookSLBean implements BookSLBeanRemote, BookSLBeanLocal {
 
     @Override
     public List findAll() {
-        Query query = em.createNamedQuery("Person.findAll");
+        Query query = em.createNamedQuery("Bookings.findAll");
         return query.getResultList();
     }
     

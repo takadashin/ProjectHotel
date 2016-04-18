@@ -13,5 +13,11 @@ import javax.ejb.Local;
  */
 @Local
 public interface UserSFBeanLocal {
+    String getUserID();
     
+   void setUserID(String UserID);
+    String getUserType();
+    void setUserType(String UserType);
+     public String getUserName();
+    public void setUserName(String UserName);
 }

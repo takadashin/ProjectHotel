@@ -15,10 +15,9 @@ import javax.ejb.Remote;
  */
 @Remote
 public interface ServiceSLBeanRemote {
-      Boolean Insert(String Name, String Email, String Phone, String Address, String Type);
+    Boolean Insert(String Name,String Description,String Textmsg);
 
-    Boolean Update(BigDecimal id,String Name, String Email, String Phone, String Address, String Type);
-
+    Boolean Update(BigDecimal id,String Name,String Description,String Textmsg);
     Boolean delete(BigDecimal Id);
 
     Object SearchByID(BigDecimal Id);

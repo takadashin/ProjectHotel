@@ -94,6 +94,7 @@
             Iterator i = itemList.iterator();
             out.println("<table style='  border-collapse: collapse;' class='object_book' border=1 collapse=0>");
             int count = 0;
+            
             while ( i.hasNext() ) {
 //                out.println("<tr>");
             count++;
@@ -106,13 +107,13 @@
                 %>
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
-                            <img style="height:150px;" src="<%="resource/img/"+item.getImg().split("/")[0]%>" alt="">
+                            <img style="height:150px;" src="<%=item.getImg() != null?"resource/img/"+item.getImg().split("/")[0]:""%>" alt="">
                             <div class="caption">
                                 <h4 class="pull-right">$<%=item.getPrice() %></h4>
                                 <h4><a href="detail.jsp?id=<%=item.getId()%>">Room <%=item.getId()%></a>
                                 </h4>
                                 
-                                <p><%=item.getDescription().length()> 50?item.getDescription().substring(0, 50):item.getDescription() %></p>
+                                <p><%=(item.getDescription()!=null && item.getDescription().length()> 50)?item.getDescription().substring(0, 50):item.getDescription() %></p>
                             </div>
                             <div class="ratings">
                                 <p class="pull-right">Click here</p>

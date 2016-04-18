@@ -13,5 +13,11 @@ import javax.ejb.Remote;
  */
 @Remote
 public interface UserSFBeanRemote {
+    String getUserID();
     
+   void setUserID(String UserID);
+    String getUserType();
+    void setUserType(String UserType);
+      String getUserName();
+     void setUserName(String UserName);
 }

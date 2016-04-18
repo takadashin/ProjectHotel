@@ -6,6 +6,7 @@
 package com.humber.ca;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
@@ -27,14 +28,22 @@ public class PendingSLBean implements PendingSLBeanRemote, PendingSLBeanLocal {
     private EntityManager em ;
     
     @Override
-    public Boolean Insert(String Name, String Email, String Phone, String Address, String Type) {
+    public Boolean Insert(BigDecimal RoomID, BigDecimal ServiceID,Date Timecall,String Status ) {
         try
-        {
+        { 
         
             
-            int id = em.createQuery("select max(u.id) from Pendings u", Integer.class).getSingleResult();
+            BigDecimal id = em.createQuery("select max(u.id) from Pendings u", BigDecimal.class).getSingleResult();
+            id = id.add(new BigDecimal(1));
             Pendings newo = new Pendings();
-            newo.setId(new BigDecimal(id));
+            newo.setId(id);
+            Rooms roomob = (Rooms)em.find(Rooms.class,RoomID);
+            Services serviceob = (Services)em.find(Services.class,ServiceID);
+            
+            newo.setRoomid(roomob);
+            newo.setServiceid(serviceob);
+            newo.setTimecall(Timecall);
+            newo.setStatus(Status);
             em.persist(newo);
          
             return true;
@@ -46,12 +55,18 @@ public class PendingSLBean implements PendingSLBeanRemote, PendingSLBeanLocal {
     }
 
     @Override
-    public Boolean Update(BigDecimal id,String Name, String Email, String Phone, String Address, String Type) {
+    public Boolean Update(BigDecimal Id,BigDecimal RoomID, BigDecimal ServiceID,Date Timecall,String Status ) {
         try
         {
         
-            Pendings newo = (Pendings)em.find(Pendings.class, id);
+            Pendings newo = (Pendings)em.find(Pendings.class, Id);
+            Rooms roomob = (Rooms)em.find(Rooms.class,RoomID);
+            Services serviceob = (Services)em.find(Services.class,ServiceID);
             
+            newo.setRoomid(roomob);
+            newo.setServiceid(serviceob);
+            newo.setTimecall(Timecall);
+            newo.setStatus(Status);
         
         return true;
         }
@@ -83,7 +98,7 @@ public class PendingSLBean implements PendingSLBeanRemote, PendingSLBeanLocal {
 
     @Override
     public List findAll() {
-        Query query = em.createNamedQuery("Person.findAll");
+        Query query = em.createNamedQuery("Pendings.findAll");
         return query.getResultList();
     }
     

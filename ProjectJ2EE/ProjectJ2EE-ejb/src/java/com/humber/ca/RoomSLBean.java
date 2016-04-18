@@ -6,6 +6,7 @@
 package com.humber.ca;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
@@ -27,33 +28,44 @@ public class RoomSLBean implements RoomSLBeanRemote, RoomSLBeanLocal {
     private EntityManager em ;
     
     @Override
-    public Boolean Insert(String Name, String Email, String Phone, String Address, String Type) {
+    public Boolean Insert(BigInteger price,BigInteger capacity,String img,BigInteger floor,String description) {
         try
         {
         
             
-            int id = em.createQuery("select max(u.id) from Rooms u", Integer.class).getSingleResult();
+            BigDecimal id = em.createQuery("select max(u.id) from Rooms u", BigDecimal.class).getSingleResult();
+            id = id.add(new BigDecimal(1));
             Rooms newo = new Rooms();
-            newo.setId(new BigDecimal(id));
+            newo.setId(id);
+            newo.setPrice(price);
+            newo.setFloor(floor);
+            newo.setCapacity(capacity);
+            newo.setDescription(description);
+            newo.setImg(img);
             em.persist(newo);
          
             return true;
         }
         catch(Exception ex)
         {
+            System.out.println(ex.getMessage());
             return false;
         }
     }
 
     @Override
-    public Boolean Update(BigDecimal id,String Name, String Email, String Phone, String Address, String Type) {
+    public Boolean Update(BigDecimal id,BigInteger price,BigInteger capacity,String img,BigInteger floor,String description) {
         try
         {
         
             Rooms newo = (Rooms)em.find(Rooms.class, id);
-            
+            newo.setPrice(price);
+            newo.setFloor(floor);
+            newo.setCapacity(capacity);
+            newo.setDescription(description);
+            newo.setImg(img);
         
-        return true;
+            return true;
         }
         catch(Exception ex)
         {
@@ -84,6 +96,12 @@ public class RoomSLBean implements RoomSLBeanRemote, RoomSLBeanLocal {
     @Override
     public List findAll() {
         Query query = em.createNamedQuery("Rooms.findAll");
+        return query.getResultList();
+    }
+    
+    @Override
+    public List findEmptyRoom() {
+        Query query = em.createNativeQuery("SELECT r.* FROM Rooms r where r.id not in (select b.roomid from Bookings b)",Rooms.class);
         return query.getResultList();
     }
     

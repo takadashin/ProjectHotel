@@ -7,19 +7,16 @@ package com.humber.ca;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -41,7 +38,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Users.findByCountry", query = "SELECT u FROM Users u WHERE u.country = :country"),
     @NamedQuery(name = "Users.findByZip", query = "SELECT u FROM Users u WHERE u.zip = :zip"),
     @NamedQuery(name = "Users.findByPhone", query = "SELECT u FROM Users u WHERE u.phone = :phone"),
-    @NamedQuery(name = "Users.findByCompany", query = "SELECT u FROM Users u WHERE u.company = :company")})
+    @NamedQuery(name = "Users.findByCompany", query = "SELECT u FROM Users u WHERE u.company = :company"),
+    @NamedQuery(name = "Users.findByType", query = "SELECT u FROM Users u WHERE u.type = :type")})
 public class Users implements Serializable {
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -85,8 +83,9 @@ public class Users implements Serializable {
     @Size(max = 20)
     @Column(name = "COMPANY")
     private String company;
-    @OneToMany(mappedBy = "userid")
-    private Collection<Bookings> bookingsCollection;
+    @Size(max = 2)
+    @Column(name = "TYPE")
+    private String type;
 
     public Users() {
     }
@@ -191,13 +190,12 @@ public class Users implements Serializable {
         this.company = company;
     }
 
-    @XmlTransient
-    public Collection<Bookings> getBookingsCollection() {
-        return bookingsCollection;
+    public String getType() {
+        return type;
     }
 
-    public void setBookingsCollection(Collection<Bookings> bookingsCollection) {
-        this.bookingsCollection = bookingsCollection;
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Override

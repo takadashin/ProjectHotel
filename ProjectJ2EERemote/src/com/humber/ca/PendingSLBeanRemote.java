@@ -6,6 +6,7 @@
 package com.humber.ca;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Remote;
 
@@ -15,9 +16,9 @@ import javax.ejb.Remote;
  */
 @Remote
 public interface PendingSLBeanRemote {
-      Boolean Insert(String Name, String Email, String Phone, String Address, String Type);
+    Boolean Insert(BigDecimal RoomID, BigDecimal ServiceID,Date Timecall,String Status );
 
-    Boolean Update(BigDecimal id,String Name, String Email, String Phone, String Address, String Type);
+    Boolean Update(BigDecimal Id,BigDecimal RoomID, BigDecimal ServiceID,Date Timecall,String Status );
 
     Boolean delete(BigDecimal Id);
 

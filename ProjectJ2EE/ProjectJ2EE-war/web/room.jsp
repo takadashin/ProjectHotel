@@ -56,7 +56,7 @@
         
           
         
-         List<Rooms> itemList = roomSession.findAll();
+         List<Rooms> itemList = roomSession.findEmptyRoom();
             
             
             Iterator i = itemList.iterator();

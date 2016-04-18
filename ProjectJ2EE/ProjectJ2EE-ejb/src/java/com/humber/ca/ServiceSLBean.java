@@ -27,14 +27,19 @@ public class ServiceSLBean implements ServiceSLBeanRemote, ServiceSLBeanLocal {
     private EntityManager em ;
     
     @Override
-    public Boolean Insert(String Name, String Email, String Phone, String Address, String Type) {
+    public Boolean Insert(String Name,String Description,String Textmsg) {
         try
         {
         
             
-            int id = em.createQuery("select max(u.id) from Services u", Integer.class).getSingleResult();
+            BigDecimal id = em.createQuery("select max(u.id) from Services u", BigDecimal.class).getSingleResult();
+            id = id.add(new BigDecimal(1));
             Services newo = new Services();
-            newo.setId(new BigDecimal(id));
+            newo.setId(id);
+            newo.setName(Name);
+            newo.setDescription(Description);
+            newo.setTextmsg(Textmsg);
+            
             em.persist(newo);
          
             return true;
@@ -46,12 +51,15 @@ public class ServiceSLBean implements ServiceSLBeanRemote, ServiceSLBeanLocal {
     }
 
     @Override
-    public Boolean Update(BigDecimal id,String Name, String Email, String Phone, String Address, String Type) {
+    public Boolean Update(BigDecimal id,String Name,String Description,String Textmsg) {
         try
         {
         
             Services newo = (Services)em.find(Services.class, id);
             
+            newo.setName(Name);
+            newo.setDescription(Description);
+            newo.setTextmsg(Textmsg);
         
         return true;
         }

@@ -1,5 +1,6 @@
 
-  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <%@page import="com.humber.ca.UserSFBeanRemote"%>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -19,7 +20,7 @@
                         <a href="room.jsp">Room</a>
                     </li>
                     <li>
-                        <a href="booking.jsp">Booking a room</a>
+                        <a href="bookings.jsp">Booking a room</a>
                     </li>
                     <li>
                         <a href="photo.jsp">Photo Gallery</a>
@@ -30,8 +31,33 @@
                     <li>
                         <a href="contact.jsp">Contact</a>
                     </li>
+                    <li>
+                        <%
+                            if(request.getParameter("btnlogout")!= null)   
+                            {
+                                session.removeAttribute("beansession");
+                            }
+                            UserSFBeanRemote checkuser = (UserSFBeanRemote) session.getAttribute("beansession");
+                            if(checkuser != null)
+                            {
+                                %>
+                                 <form method="POST">
+                                     <input type="submit" style="margin-top: 7px;" class="btn btn-default" name="btnlogout" value="Hi <%=checkuser.getUserName() %> Sign out"/>
+                        </form>
+                                 <%
+                            }
+                            else
+                                %><a href="login.jsp">Log in</a><%
+                            
+                        %>
+                       
+                         
+                    </li>
+                    
                 </ul>
+                
             </div>
+            
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->

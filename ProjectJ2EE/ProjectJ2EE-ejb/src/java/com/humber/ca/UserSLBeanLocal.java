@@ -15,13 +15,14 @@ import javax.ejb.Local;
  */
 @Local
 public interface UserSLBeanLocal {
-      Boolean Insert(String Name, String Email, String Phone, String Address, String Type);
+     Boolean Insert(String firstname,String lastname,String email,String password,String address,String city,String state,String country,String zip,String phone,String company,String Type);
 
-    Boolean Update(BigDecimal id,String Name, String Email, String Phone, String Address, String Type);
+    Boolean Update(BigDecimal id,String firstname,String lastname,String email,String password,String address,String city,String state,
+            String country,String zip,String phone,String company,String Type);
 
     Boolean delete(BigDecimal Id);
 
     Object SearchByID(BigDecimal Id);
-
+    Object authentication(String email,String password);
     List findAll();
 }

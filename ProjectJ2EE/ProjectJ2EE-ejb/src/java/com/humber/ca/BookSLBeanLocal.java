@@ -6,6 +6,8 @@
 package com.humber.ca;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -15,9 +17,10 @@ import javax.ejb.Local;
  */
 @Local
 public interface BookSLBeanLocal {
-    Boolean Insert(String Name, String Email, String Phone, String Address, String Type);
+    Boolean Insert(BigDecimal RoomID, BigDecimal UserID,Date CheckIn,Date CheckOut,BigInteger numadult,BigInteger numkid );
 
-    Boolean Update(BigDecimal id,String Name, String Email, String Phone, String Address, String Type);
+    Boolean Update(BigDecimal id,BigDecimal RoomID, BigDecimal UserID,Date CheckIn,Date CheckOut,BigInteger numadult,BigInteger numkid);
+
 
     Boolean delete(BigDecimal Id);
 
