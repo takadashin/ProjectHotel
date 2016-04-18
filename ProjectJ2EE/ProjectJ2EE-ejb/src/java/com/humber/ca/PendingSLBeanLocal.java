@@ -25,4 +25,5 @@ public interface PendingSLBeanLocal {
     Object SearchByID(BigDecimal Id);
 
     List findAll();
+    List findByRoomID(BigDecimal id);
 }

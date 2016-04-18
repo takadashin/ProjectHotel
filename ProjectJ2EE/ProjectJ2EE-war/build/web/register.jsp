@@ -50,7 +50,7 @@
                     InitialContext ic = new InitialContext();
                     Object o = ic.lookup(UserSLBeanRemote.class.getName());
                     UserSLBeanRemote roomSession = (UserSLBeanRemote) o;
-                      
+                    
                     Users newobject = null;
                     
                     if(request.getParameter("btninsert")!= null)   
@@ -73,9 +73,13 @@
                         else
                         {
                            
-                             boolean check = roomSession.Update(new BigDecimal(request.getParameter("editid")),request.getParameter("txt_fname"), request.getParameter("txt_lname"), request.getParameter("txt_email"), request.getParameter("txt_pass"), request.getParameter("txt_address"), request.getParameter("txt_city"), request.getParameter("txt_state"),  request.getParameter("txt_country"), request.getParameter("txt_zip"), request.getParameter("txt_phone"), request.getParameter("txt_company"),"U");
+                             boolean check = roomSession.Update(new BigDecimal(checkuser.getUserID()),request.getParameter("txt_fname"), request.getParameter("txt_lname"), request.getParameter("txt_email"), request.getParameter("txt_pass"), request.getParameter("txt_address"), request.getParameter("txt_city"), request.getParameter("txt_state"),  request.getParameter("txt_country"), request.getParameter("txt_zip"), request.getParameter("txt_phone"), request.getParameter("txt_company"),"U");
                             if(check)
-                        {%>
+                        {
+                            checkuser.setUserName(request.getParameter("txt_fname"));
+
+                        
+                        %>
                             <div class="alert alert-success" role="alert">  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>Update success</div>
                         <%
                             }
@@ -88,8 +92,12 @@
                     }
                     if(request.getParameter("editid") != null)
                         {
-                       
-                        newobject = (Users) roomSession.SearchByID(new BigDecimal(request.getParameter("editid")));
+                       if(checkuser!= null)
+                        newobject = (Users) roomSession.SearchByID(new BigDecimal(checkuser.getUserID()));
+                        
+                    else{
+                    response.sendRedirect("login.jsp");
+                    }
                         }
 
              %>   

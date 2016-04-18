@@ -7,6 +7,7 @@ package com.humber.ca;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -111,6 +112,13 @@ public class BookSLBean implements BookSLBeanRemote, BookSLBeanLocal {
     public List findAll() {
         Query query = em.createNamedQuery("Bookings.findAll");
         return query.getResultList();
+    }
+    @Override
+    public List findByUserID(BigDecimal id) {
+        Users cust = (Users)em.find(Users.class, id);
+         Query query = em.createQuery( "Select ad from Bookings ad where ad.userid = :uid" );
+         query.setParameter("uid", cust);
+        return new ArrayList<Bookings>( query.getResultList()) ;
     }
     
 }

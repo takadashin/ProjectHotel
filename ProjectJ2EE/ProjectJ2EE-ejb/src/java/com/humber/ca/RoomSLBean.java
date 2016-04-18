@@ -105,4 +105,11 @@ public class RoomSLBean implements RoomSLBeanRemote, RoomSLBeanLocal {
         return query.getResultList();
     }
     
+    @Override
+    public List findUserRoom(BigDecimal id) {
+        Users cust = (Users)em.find(Users.class, id);
+        Query query = em.createNativeQuery("SELECT r.* FROM Rooms r where r.id in (select b.roomid from Bookings b where b.userid="+id.toString()+")",Rooms.class);
+
+        return query.getResultList();
+    }
 }

@@ -83,7 +83,7 @@
                                 <p><%=item.getDescription().length()> 50?item.getDescription().substring(0, 50):item.getDescription() %></p>
                             </div>
                             <div class="ratings">
-                                <p class="pull-right">Click here</p>
+                                <p class="pull-right">Capacity: <%=item.getCapacity()%> peoples</p>
                                 <p>
                                     <span class="glyphicon glyphicon-star"></span>
                                     <span class="glyphicon glyphicon-star"></span>

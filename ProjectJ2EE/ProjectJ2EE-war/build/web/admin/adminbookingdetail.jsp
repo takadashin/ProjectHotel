@@ -114,7 +114,7 @@
                                 <%
                                 for(Rooms item : allroom)
                                 {
-                                %><option <%=(newobject!=null)?newobject.getRoomid().getId()==item.getId()?"selected":"":""%> value="<%=item.getId()%>">Room <%=item.getId()%></option> <%
+                                %><option <%=(newobject!=null)?newobject.getRoomid().getId().equals(item.getId())?"selected":"":""%> value="<%=item.getId()%>">Room <%=item.getId()%></option> <%
                                 }
                                 %>
                               </select>
@@ -125,7 +125,7 @@
                                 <%
                                 for(Users item : alluser)
                                 {
-                                %><option <%=(newobject!=null)?newobject.getUserid().getId()==item.getId()?"selected":"":""%> value="<%=item.getId()%>">Mr/Mrs <%=item.getFirstname()+ item.getLastname()%></option> <%
+                                %><option <%=(newobject!=null)?newobject.getUserid().getId().equals(item.getId())?"selected":"":""%> value="<%=item.getId()%>">Mr/Mrs <%=item.getFirstname()+ item.getLastname()%></option> <%
                                 }
                                 %>
                               </select>

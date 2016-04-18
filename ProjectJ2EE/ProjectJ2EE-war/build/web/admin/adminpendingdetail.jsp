@@ -101,6 +101,8 @@
                     List<Services> allservice = serviceSession.findAll();
              %>
             <!-- /.row -->
+
+            
             <div class="row">
                 <div class="col-lg-12">
                     <form method="POST" action="adminpendingdetail.jsp<%=(request.getParameter("editid")!= null)?"?editid="+request.getParameter("editid"):""%>">
@@ -114,7 +116,10 @@
                                 <%
                                 for(Rooms item : allroom)
                                 {
-                                %><option <%=(newobject!=null)?newobject.getRoomid().getId()==item.getId()?"selected":"":""%> value="<%=item.getId()%>">Room <%=item.getId()%></option> <%
+                                    
+                                %>
+                    
+                                <option <%=(newobject!=null)?newobject.getRoomid().getId().equals(item.getId())?"selected":"":""%> value="<%=item.getId()%>">Room <%=item.getId()%></option> <%
                                 }
                                 %>
                               </select>
@@ -125,7 +130,7 @@
                                 <%
                                 for(Services item : allservice)
                                 {
-                                %><option <%=(newobject!=null)?newobject.getServiceid().getId()==item.getId()?"selected":"":""%> value="<%=item.getId()%>"> <%=item.getName()%></option> <%
+                                %><option <%=(newobject!=null)?newobject.getServiceid().getId().equals(item.getId())?"selected":"":""%> value="<%=item.getId()%>"> <%=item.getName()%></option> <%
                                 }
                                 %>
                               </select>

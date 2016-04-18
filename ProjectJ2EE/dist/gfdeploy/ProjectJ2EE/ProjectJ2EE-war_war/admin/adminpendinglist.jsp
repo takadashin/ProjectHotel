@@ -67,6 +67,7 @@
                         <th>ID</th>
                         <th>SERVICEID</th>
                         <th>ROOMID</th>
+                        <th>STATUS</th>
                         <th>TIMECALL</th>
                         <th>Operation</th>
                       </tr>
@@ -87,6 +88,7 @@
                             <td><%=item.getId()%></td>
                             <td><%=item.getServiceid().getName()%></td>
                             <td><%=item.getRoomid().getId()%></td>
+                            <td><%=item.getStatus()!= null?item.getStatus().equals("A")?"Active":"De Active":"Not set"%></td>
                             <td><%=item.getTimecall()%></td>
                    
                             <td><button type="submit" class="btn btn-danger" name="deletebtn">Delete</button>

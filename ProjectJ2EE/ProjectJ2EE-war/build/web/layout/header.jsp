@@ -53,7 +53,15 @@
                        
                          
                     </li>
-                    
+                    <li>
+                        <%
+                                if(checkuser != null)
+                            {
+                            %><a href="register.jsp?editid=1">User Profile</a><%
+                            }
+                        %>
+                        
+                    </li>
                 </ul>
                 
             </div>

@@ -6,6 +6,7 @@
 package com.humber.ca;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -100,6 +101,14 @@ public class PendingSLBean implements PendingSLBeanRemote, PendingSLBeanLocal {
     public List findAll() {
         Query query = em.createNamedQuery("Pendings.findAll");
         return query.getResultList();
+    }
+    
+    @Override
+    public List findByRoomID(BigDecimal id) {
+        Rooms cust = (Rooms)em.find(Rooms.class, id);
+         Query query = em.createQuery( "Select ad from Pendings ad where ad.roomid = :uid" );
+         query.setParameter("uid", cust);
+        return new ArrayList<Bookings>( query.getResultList()) ;
     }
     
 }

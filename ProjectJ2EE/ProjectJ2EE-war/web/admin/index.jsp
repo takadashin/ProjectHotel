@@ -29,6 +29,9 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
+            <%
+            response.sendRedirect("adminroomlist.jsp");
+            %>
             <div class="row">
                 <div class="col-lg-3 col-md-6">
                     <div class="panel panel-primary">

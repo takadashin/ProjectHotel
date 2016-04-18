@@ -109,6 +109,7 @@
                         <h4><a href="detail.jsp?id=<%=item.getId()%>">Room <%=item.getId()%></a>
                         </h4>
                          <p>Floor: <%=item.getFloor()%></p>
+                          <p>Capacity <%=item.getCapacity()%> people</p>
                         <p><%=item.getDescription()%></p>
                     </div>
                     <div class="ratings">

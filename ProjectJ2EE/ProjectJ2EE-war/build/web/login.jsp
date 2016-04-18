@@ -57,7 +57,7 @@
                         {
                             if(request.getParameter("btnlogin")!= null)   
                             {
-                                out.println("Ok");
+                                
 //                                
                                 sbstring =  (UserSFBeanRemote) ic.lookup(UserSFBeanRemote.class.getName());
                                 Users ob = (Users) serviceSession.authentication(request.getParameter("txt_email"), request.getParameter("txt_pass"));
@@ -74,6 +74,12 @@
                                     }
                                     else
                                         response.sendRedirect("index.jsp");
+                                }
+                                else
+                                    {
+                                 %>
+                            <div class="alert alert-danger" role="alert">  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>Login failed. Email or password is not correct</div>
+                        <%
                                 }
                             }
 //                        

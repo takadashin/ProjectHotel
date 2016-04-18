@@ -27,4 +27,5 @@ public interface BookSLBeanLocal {
     Object SearchByID(BigDecimal Id);
 
     List findAll();
+    List findByUserID(BigDecimal id);
 }

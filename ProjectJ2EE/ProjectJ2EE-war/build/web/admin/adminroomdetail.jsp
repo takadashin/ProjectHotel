@@ -3,6 +3,8 @@
     Created on : 12-Apr-2016, 10:50:59 AM
     Author     : khai
 --%>
+
+<%@page import="java.io.InputStream"%>
 <%@page import="java.math.BigInteger"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
@@ -10,6 +12,7 @@
 <%@page import="com.humber.ca.RoomSLBeanRemote"%>
 <%@page import="com.humber.ca.Rooms"%>
 <%@page import="javax.naming.InitialContext"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,9 +42,14 @@
                     Object o = ic.lookup(RoomSLBeanRemote.class.getName());
                     RoomSLBeanRemote roomSession = (RoomSLBeanRemote) o;
                       
+                    ///////////////
                     
+                    
+                    ////////////////
                     if(request.getParameter("btninsert")!= null)   
                     {
+                        
+                        
                         if(request.getParameter("editid") == null)
                         {
                             boolean check = roomSession.Insert(new BigInteger(request.getParameter("txt_price")),new BigInteger(request.getParameter("txt_cap")),
@@ -100,7 +108,7 @@
                         <div class="form-group">
                             <label for="comment" >Image</label>
                             <input type="text" class="form-control" value="<%=(newobject!=null)?newobject.getImg():""%>" name="txt_img" aria-describedby="basic-addon1">
-                            <input type='file' name='file_img' />
+                           
                         </div>
                          <div class="form-group">
                             <label for="comment" >Floor</label>
@@ -113,6 +121,10 @@
                         
                         <button type="submit" class="btn btn-info pull-right" name="btninsert"><%=(request.getParameter("editid")!= null)?"Save":"Insert"%></button>
                     </form>
+                     <form name="uploadForm" action="upload.jsp" enctype="multipart/form-data" method="post" target="_blank">
+              <input type="file" name="file" accept=".jpg,.png"/>
+              <input TYPE=Button name='Upload' Value='Upload' onClick="uploadForm.Upload.value='Uploading...';document.uploadForm.action='upload.jsp';document.uploadForm.submit()">
+          </form>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>

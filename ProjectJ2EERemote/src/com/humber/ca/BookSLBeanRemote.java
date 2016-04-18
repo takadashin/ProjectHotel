@@ -26,4 +26,5 @@ public interface BookSLBeanRemote {
     Object SearchByID(BigDecimal Id);
 
     List findAll();
+    List findByUserID(BigDecimal id);
 }

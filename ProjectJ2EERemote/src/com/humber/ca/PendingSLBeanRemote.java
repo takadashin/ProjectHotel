@@ -25,4 +25,5 @@ public interface PendingSLBeanRemote {
     Object SearchByID(BigDecimal Id);
 
     List findAll();
+    List findByRoomID(BigDecimal id);
 }

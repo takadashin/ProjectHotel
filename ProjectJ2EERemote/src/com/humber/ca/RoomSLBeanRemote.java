@@ -26,4 +26,5 @@ public interface RoomSLBeanRemote {
 
     List findAll();
     List findEmptyRoom();
+     List findUserRoom(BigDecimal id) ;
 }

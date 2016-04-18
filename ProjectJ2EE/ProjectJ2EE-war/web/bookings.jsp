@@ -75,7 +75,7 @@
                            
                             //04/20/2016 7:25 PM
                             
-                            boolean check = roomSession.Insert(new BigDecimal(request.getParameter("cb_room")),new BigDecimal(request.getParameter("cb_user")),df.parse(request.getParameter("dtp_checkin")),df.parse(request.getParameter("dtp_checkout")),new BigInteger(request.getParameter("txt_adult")),new BigInteger(request.getParameter("txt_child")));
+                            boolean check = roomSession.Insert(new BigDecimal(request.getParameter("cb_room")),new BigDecimal(request.getParameter("cb_user")),df.parse(request.getParameter("dtp_checkin")),df.parse(request.getParameter("dtp_checkout")),new BigInteger(request.getParameter("txt_adult").equals("")?"0":request.getParameter("txt_adult")),new BigInteger(request.getParameter("txt_child").equals("")?"0":request.getParameter("txt_child")));
                         if(check)
                         {%>
                             <div class="alert alert-success" role="alert">  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>Insert success</div>
@@ -123,6 +123,10 @@
                             <label for="comment" >Room</label>
                             <select class="form-control" name="cb_room">
                                 <%
+                                if(request.getParameter("editid") != null)
+                                {
+                                    out.println("<option selected value='"+newobject.getRoomid().getId()+"'>Room "+newobject.getRoomid().getId()+"</option>");
+                                }
                                 for(Rooms item : allroom)
                                 {
                                 %><option <%=(newobject!=null)?newobject.getRoomid().getId()==item.getId()?"selected":"":""%> value="<%=item.getId()%>">Room <%=item.getId()%></option> <%
@@ -160,11 +164,11 @@
                         </div>   
                         <div class="form-group">
                             <label for="comment" >Number of adult</label>
-                            <input type="text" class="form-control num_only" maxlength="2" value="<%=(newobject!=null)?newobject.getNumadult():""%>" name="txt_adult" aria-describedby="basic-addon1">
+                            <input type="text" class="form-control num_only" maxlength="2" value="<%=(newobject!=null)?newobject.getNumadult():"0"%>" name="txt_adult" aria-describedby="basic-addon1">
                         </div>
                         <div class="form-group">
                             <label for="comment" >Number of kid</label>
-                            <input type="text" class="form-control num_only" maxlength="2" value="<%=(newobject!=null)?newobject.getNumchild():""%>" name="txt_child" aria-describedby="basic-addon1">
+                            <input type="text" class="form-control num_only" maxlength="2" value="<%=(newobject!=null)?newobject.getNumchild():"0"%>" name="txt_child" aria-describedby="basic-addon1">
                         </div>
                         
                         <button type="submit" class="btn btn-info pull-right" name="btninsert"><%=(request.getParameter("editid")!= null)?"Save":"Insert"%></button>
