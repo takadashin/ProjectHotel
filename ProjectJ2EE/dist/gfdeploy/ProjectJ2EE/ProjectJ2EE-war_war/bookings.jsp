@@ -132,8 +132,10 @@
                         <div class="form-group">
                             <label for="comment" >User</label>
                             <select class="form-control" name="cb_user">
-                                <%if(checkuser != null)%>
-                                <option value="<%=checkuser.getUserID()%>"><%=checkuser.getUserName()%></option>
+                                <%if(checkuser != null)
+                                    out.println("<option value='"+checkuser.getUserID()+"'>"+checkuser.getUserName()+"</option>");
+                                %>
+                                
                               </select>
                         </div>
                         
