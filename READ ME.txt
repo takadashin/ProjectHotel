@@ -1,0 +1,4 @@
+1. Oracle DB settings:
+DB URL	jdbc:oracle:thin:@dilbert.humber.ca:1521:grok
+User N01009181
+PW oracle
