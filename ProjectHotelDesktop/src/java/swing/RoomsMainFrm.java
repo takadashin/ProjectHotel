@@ -9,9 +9,12 @@ import com.humber.ca.BookingAdminSLBeanRemote;
 import com.humber.ca.RoomAdminSLBeanRemote;
 import com.humber.ca.Rooms;
 import com.humber.ca.UserAdminSLBeanRemote;
+import com.humber.ca.Users;
+import java.awt.Dialog;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Ziyi
@@ -24,6 +27,8 @@ public class RoomsMainFrm extends javax.swing.JFrame {
     
     private static BookingAdminSLBeanRemote bookingAdminSLBean;
     
+    public static Users currentUser;
+    public boolean loginOK=false;
     /**
      * Creates new form RoomsMainFrm
      */
@@ -35,6 +40,20 @@ public class RoomsMainFrm extends javax.swing.JFrame {
         this.roomAdminSLBean = roomAdminSLBean;
         this.userAdminSLBean = userAdminSLBean;
         this.bookingAdminSLBean = bookingAdminSLBean;
+        
+        if (null == currentUser){
+            dlgLogin.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+            dlgLogin.setLocation(400, 200);
+            dlgLogin.pack();
+            dlgLogin.getRootPane().setDefaultButton(btnLogin);//enable vk_enter for btnLogin
+            dlgLogin.setVisible(true);
+            //authorization(currentUser);//method for disabling unauthorized behavior
+        }
+                
+        if (currentUser.getId() != null)
+            lblAccStatus.setText("Welcome, "+ currentUser.getFirstname() + " " + currentUser.getLastname() + "!");
+
+        //authorization(currentUser);
     }
 
     /**
@@ -46,6 +65,14 @@ public class RoomsMainFrm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        dlgLogin = new javax.swing.JDialog();
+        btnLogin = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        btnExit = new javax.swing.JButton();
+        txtAccName = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtAccPW = new javax.swing.JPasswordField();
+        lblAccStatus = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -63,16 +90,68 @@ public class RoomsMainFrm extends javax.swing.JFrame {
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenuItem14 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jMenuItem16 = new javax.swing.JMenuItem();
-        jMenuItem17 = new javax.swing.JMenuItem();
-        jMenuItem18 = new javax.swing.JMenuItem();
-        jMenuItem19 = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
-        jMenuItem21 = new javax.swing.JMenuItem();
-        jMenuItem22 = new javax.swing.JMenuItem();
-        jMenuItem23 = new javax.swing.JMenuItem();
-        jMenuItem24 = new javax.swing.JMenuItem();
+
+        btnLogin.setMnemonic('i');
+        btnLogin.setText("Login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Account:");
+
+        btnExit.setMnemonic('x');
+        btnExit.setText("Exit");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
+
+        txtAccName.setText("J.Smith@js.com");
+
+        jLabel2.setText("Password:");
+
+        javax.swing.GroupLayout dlgLoginLayout = new javax.swing.GroupLayout(dlgLogin.getContentPane());
+        dlgLogin.getContentPane().setLayout(dlgLoginLayout);
+        dlgLoginLayout.setHorizontalGroup(
+            dlgLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dlgLoginLayout.createSequentialGroup()
+                .addContainerGap(86, Short.MAX_VALUE)
+                .addGroup(dlgLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(dlgLoginLayout.createSequentialGroup()
+                        .addGroup(dlgLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(dlgLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtAccName, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtAccPW, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(dlgLoginLayout.createSequentialGroup()
+                        .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23)))
+                .addGap(74, 74, 74))
+        );
+        dlgLoginLayout.setVerticalGroup(
+            dlgLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dlgLoginLayout.createSequentialGroup()
+                .addContainerGap(44, Short.MAX_VALUE)
+                .addGroup(dlgLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtAccName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(dlgLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtAccPW, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addGroup(dlgLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLogin)
+                    .addComponent(btnExit))
+                .addGap(41, 41, 41))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -193,83 +272,23 @@ public class RoomsMainFrm extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
-        jMenu4.setText("RoomService");
-
-        jMenuItem16.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem16.setText("List All Rooms");
-        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem16ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem16);
-
-        jMenuItem17.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem17.setText("Insert New Room");
-        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem17ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem17);
-
-        jMenuItem18.setText("Delete Room");
-        jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem18ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem18);
-
-        jMenuItem19.setText("Update Room");
-        jMenu4.add(jMenuItem19);
-
-        jMenuBar1.add(jMenu4);
-
-        jMenu5.setText("Pendings");
-
-        jMenuItem21.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem21.setText("List All Rooms");
-        jMenuItem21.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem21ActionPerformed(evt);
-            }
-        });
-        jMenu5.add(jMenuItem21);
-
-        jMenuItem22.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem22.setText("Insert New Room");
-        jMenuItem22.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem22ActionPerformed(evt);
-            }
-        });
-        jMenu5.add(jMenuItem22);
-
-        jMenuItem23.setText("Delete Room");
-        jMenuItem23.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem23ActionPerformed(evt);
-            }
-        });
-        jMenu5.add(jMenuItem23);
-
-        jMenuItem24.setText("Update Room");
-        jMenu5.add(jMenuItem24);
-
-        jMenuBar1.add(jMenu5);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 672, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(444, Short.MAX_VALUE)
+                .addComponent(lblAccStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 276, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblAccStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(247, Short.MAX_VALUE))
         );
 
         pack();
@@ -336,30 +355,6 @@ public class RoomsMainFrm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
-    private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem16ActionPerformed
-
-    private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem17ActionPerformed
-
-    private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem18ActionPerformed
-
-    private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem21ActionPerformed
-
-    private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem22ActionPerformed
-
-    private void jMenuItem23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem23ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem23ActionPerformed
-
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
         RoomsAdvSearchMainFrm a = new RoomsAdvSearchMainFrm();
@@ -383,6 +378,40 @@ public class RoomsMainFrm extends javax.swing.JFrame {
         a.setLocationRelativeTo(null);
         a.setVisible(true);
     }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        // TODO add your handling code here:
+        List<Users> listAllUsers = (List<Users>)userAdminSLBean.listAllEntities();
+        
+        for(Users u : listAllUsers){
+            if (txtAccName.getText().equals(u.getEmail())){
+                    if (txtAccPW.getText().equals(u.getPassword())){
+                        loginOK = true;
+                        currentUser = u;
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Incorrect password!");
+                        return;
+                    }
+            }
+             
+        }
+        if(!loginOK){
+                JOptionPane.showMessageDialog(null, "Account does not exist!");
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Login successful!"
+                    + "\n\n"
+                    + "Login as "+currentUser.getFirstname()+" "+currentUser.getLastname()+"."
+                    + "\n\n");
+                
+            }   
+    }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnExitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -435,26 +464,21 @@ public class RoomsMainFrm extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnLogin;
+    private javax.swing.JDialog dlgLogin;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
-    private javax.swing.JMenuItem jMenuItem16;
-    private javax.swing.JMenuItem jMenuItem17;
-    private javax.swing.JMenuItem jMenuItem18;
-    private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem21;
-    private javax.swing.JMenuItem jMenuItem22;
-    private javax.swing.JMenuItem jMenuItem23;
-    private javax.swing.JMenuItem jMenuItem24;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
@@ -462,5 +486,8 @@ public class RoomsMainFrm extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JLabel lblAccStatus;
+    private javax.swing.JTextField txtAccName;
+    private javax.swing.JPasswordField txtAccPW;
     // End of variables declaration//GEN-END:variables
 }
